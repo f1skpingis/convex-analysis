@@ -1,0 +1,51 @@
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[>=Latex]
+        \tikzset{
+            level curve/.style={draw=black!45, line width=0.55pt},
+            concave slice/.style={draw=red!70!black, line width=0.9pt}
+        }
+
+        % The level curves and the concave-looking ray in x-space.
+        \begin{scope}[x=0.92cm,y=0.92cm]
+            \input{figures/exercise-3-2-level-sets-a-curves.tex}
+
+            \draw[concave slice,->]
+                (0.35,0) -- (2.38,0)
+                node[right,black] {$\ell_{\mathrm{conc}}$};
+            \foreach \x/\lev in {
+                0.825/1,
+                1.270/2,
+                2.047/3
+            } {
+                \fill[red!70!black] (\x,0) circle (1.55pt)
+                    node[below,black,font=\scriptsize] {$\lev$};
+            }
+        \end{scope}
+
+        % Linear interpolation of the samples along the ray.
+        \begin{scope}[xshift=5.0cm,yshift=-1.55cm,x=2.4cm,y=0.72cm]
+            \draw[->] (-0.08,0.70) -- (1.42,0.70)
+                node[below] {$s$};
+            \draw[->] (-0.08,0.70) -- (-0.08,3.38)
+                node[left] {$f$};
+            \foreach \y in {1,2,3} {
+                \draw (-0.10,\y) -- (-0.06,\y);
+                \node[anchor=east,font=\scriptsize] at (-0.12,\y) {$\y$};
+            }
+            \draw[black!20,densely dotted] (0,0.70) -- (0,1);
+            \draw[black!20,densely dotted] (0.445,0.70) -- (0.445,2);
+            \draw[black!20,densely dotted] (1.222,0.70) -- (1.222,3);
+            \draw[concave slice] (0,1) -- (0.445,2) -- (1.222,3);
+            \foreach \x/\y in {0/1,0.445/2,1.222/3} {
+                \fill[red!70!black] (\x,\y) circle (1.55pt);
+            }
+            \node[font=\scriptsize] at (0.67,3.52)
+                {decreasing secant slopes};
+        \end{scope}
+    \end{tikzpicture}
+    \caption{Linear interpolation of the sampled values along
+        $\ell_{\mathrm{conc}}$.  Its decreasing secant slopes rule out
+        convexity.}
+    \label{fig:exercise-3-2-level-sets-a-solution}
+\end{figure}
