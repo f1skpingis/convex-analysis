@@ -6,16 +6,59 @@
 \input{figures/exercise-3-2-level-sets-b.tex}
 
 For the first family of curves seen in Figure \ref{fig:exercise-3-2-level-sets-a}, we can first conclude that they are certainly not concave or quasiconcave since the superlevel sets are not convex.
-The sublevel sets are however convex so we can claim quasiconvexity. 
+The sublevel sets are however convex so we can claim quasiconvexity.
 Recall the restriction of a convex function to any line through it's domain must also be convex, therefore to check convexity of $f$ we probe it's behavior along lines in the domain.
 As is shown in Figure \ref{fig:exercise-3-2-level-sets-a-solution}, it is easy to identify directions in which the slope tapers off,
-i.e. directions in which the graph lies above the chord between some points on the line. 
+i.e. directions in which the graph lies above the chord between some points on the line.
 Therefore we can label any function with the level curves as shown in Figure \ref{fig:exercise-3-2-level-sets-a} as quasiconvex, but not convex, quasiconcave or concave.
+\input{figures/exercise-3-2-level-sets-a-solution.tex}
 
 Now for Figure \ref{fig:exercise-3-2-level-sets-b} we see that the superlevel sets are convex and the sublevel sets are not, so here it is the other way around.
 Performing the same kind of analysis along lines in the domain, one draws the conclusion that this function is not only quasiconcave but actually concave as well.
-So functions with the level curves shown in Figure \ref{fig:exercise-3-2-level-sets-b} are convcave and quasiconcave but neither convex nor quasiconvex. 
+So functions with the level curves shown in Figure \ref{fig:exercise-3-2-level-sets-b} are convcave and quasiconcave but neither convex nor quasiconvex.
 
-\medskip
+\subsubsection{CO: 3.5}
+\textbf{Running average of a convex function. Suppose $f: \mathbb{R} \to \mathbb{R}$ is convex, with $\mathbb{R}_+ \subseteq \operatorname{dom}f$. Show that its running average F, defined as}
+\[
+    F(x) = \frac{1}{x}\int_0^xf(t)dt
+\]
+\textbf{is convex. \textit{Hint}. For each $s$, $f(sx)$ is convex in x, so $\int_0^1 f(sx)ds$ is convex.}
 
-\input{figures/exercise-3-2-level-sets-a-solution.tex}
+This can be shown by a change of variable.
+Change integration variable from $t \to xt$. 
+This changes the integration measure to $xdt$ and the bounds from $(0, x)$ to $(0, 1)$.
+We get
+\[
+    F(x) = \frac{1}{x} \int_0^1f(xt)xdt = \int_0^1 f(xt)dt.
+\]
+This is exactly the quantity the said to be convex in the hint.
+
+\subsubsection{CO: 3.6}
+\textbf{Functions and epigraphs. When is the epigraph of a function a halfspace? When is the
+epigraph of a function a convex cone? When is the epigraph of a function a polyhedron?}
+
+\textit{Halfspace}. The epigraph of a real valued function is the set 
+\[
+    \operatorname{epi} f = \{ (x, t) \in \operatorname{dom}f \times \mathbb{R} \mid f(x) \leq t \}
+\]
+
+The description of a halfspace in terms of an inequality is $a^T x \leq b$.
+Thus if we take $f(x) = a^T + b$ in the epigraph definition above, we see that any affine function has a halfspace as epigraph.
+
+\textit{Convex cone}. If the epigraph is a convex cone that means that $(x, t) \in \operatorname{dom} f \implies (\lambda x, \lambda t) \in \operatorname{dom} f$.
+That means that if $f(x) \leq t$ then $f(\lambda x) \leq \lambda t$.
+
+Now, fix a point on the boundary on the epigraph, $(x, t)$ such that $f(x) = t$.
+Scale that point by $lambda$, then we get $f(\lambda x) \leq \lambda t = \lambda f(x)$.
+Now, we do it in the reverse direction from $\lambda x \to x$.
+Pick $(\lambda x, r)\in \operatorname{epi} f$ such that $f(\lambda x) = r$.
+This means that $f(\frac{\lambda}{\lambda} x) = f(x) \leq \lambda r = \lambda f(\lambda x)$.
+Bringing these inqeualities together, we see that 
+\[
+\lambda f(x) \leq f(\lambda x) \leq \lambda f(x)
+\] 
+
+This can only hold if $f(\lambda x) = \lambda f(x)$, a so called \textit{homogeneous} function of degree one.
+
+\textit{Polyhedron}. A polyhedron is an intersection of halfspaces. 
+This means that the function is the maximum of a set of affine functions, or a convex, piecewise affine function. 
