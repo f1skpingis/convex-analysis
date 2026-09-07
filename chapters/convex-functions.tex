@@ -31,7 +31,7 @@ We get
 \[
     F(x) = \frac{1}{x} \int_0^1f(xt)xdt = \int_0^1 f(xt)dt.
 \]
-This is exactly the quantity the said to be convex in the hint.
+This is exactly the quantity said to be convex in the hint.
 
 \subsubsection{CO: 3.6}
 \textbf{Functions and epigraphs. When is the epigraph of a function a halfspace? When is the
@@ -61,4 +61,63 @@ Bringing these inqeualities together, we see that
 This can only hold if $f(\lambda x) = \lambda f(x)$, a so called \textit{homogeneous} function of degree one.
 
 \textit{Polyhedron}. A polyhedron is an intersection of halfspaces. 
-This means that the function is the maximum of a set of affine functions, or a convex, piecewise affine function. 
+This means that the function is a convex piecewise affine function. 
+I claim this implies that the function is of the form $f(x) = \max_i a_i^T x + b_i$.
+
+\textit{Proof}. Pick a point $x_i$ in the interior of some region $P_i$ where the affine piece is $\ell_i(x) = a_i^T x + b_i$.
+Since $a_i$ is the gradient there, $\ell_i$ defines a supporting hyperplane of the epigraph, i.e. $f(x) \geq \ell_i(x), \quad \forall x$.
+This argument can be repeated for all affine pieces and thus $f(x) \geq \ell_i(x), \quad \forall i$. 
+But on the other hand, since at every $x$ some piece $j$ is active, meaning
+\[
+    f(x) = \ell_j(x)
+\]
+we conclude
+\[
+    f(x) = \max_i \ell_i(x).
+\]
+\hfill$\square$
+\subsubsection{CO: 3.15}
+\textbf{A family of concave utility functions. For $0 < \alpha \leq 1$ let}
+\[
+    u_\alpha(x) = \frac{x^\alpha - 1}{\alpha},
+\]
+\textbf{with $\operatorname{dom} u_\alpha = \mathbb{R}_+$. We also define $u_0(x) = \log x$ (with $\operatorname{dom} u_0 = \mathbb{R}_{++}$).}
+\begin{enumerate}[label=(\alph*)]
+    \item \textbf{Show that for $x > 0$, $u_0(x) = \lim_{\alpha \to 0} u_\alpha(x)$.}
+    \item \textbf{Show that $u_\alpha$ are concave, monotone increasing, and all satisfy $u_\alpha(1) = 0$.}
+\end{enumerate}
+\textbf{These functions are often used in economics to model the benefit or utility of some quantity of goods or money.
+Concavity of $u_\alpha$ means that the marginal utility (i.e., the increase in utility obtained for a fixed increase in the goods) decreases as the amount of goods increases.
+In other words, concavity models the effect of satiation.}
+\begin{enumerate}
+    \item[a)] I can think of two ways to show this, both of which are quite simple.
+    The first one is using L'Hôpital's rule and the second is via the Taylor expansion of $u_\alpha$.
+    L'Hôpital's rule is (assuming the limits exist and so on)
+    \[
+        \lim_{x \to 0}\frac{f(x)}{g(x)} = \lim_{x \to 0} \frac{f'(x)}{g'(x)}
+    \]
+    Plugging in our function
+    \[
+        \lim_{\alpha \to 0} \frac{x^\alpha - 1}{\alpha} = \lim_{\alpha \to 0} (\log x) x^\alpha = \log x
+    \]
+    Pretty clean. 
+    Now, looking the the Taylor expansion instead, we have
+    \[
+        \frac{x^\alpha - 1}{\alpha} = \frac{e^{\log x \alpha} - 1}{\alpha} = \frac{\sum_{k=0}^{\infty} \frac{(\log x \alpha)^k}{k!} - 1}{\alpha}
+    \]
+    Picking out the terms that are at most of order $\alpha^1$, we have
+    \[
+        u_\alpha(x) = \frac{1 + \log x \alpha - 1 + O(\alpha^2)}{\alpha} = \log x + O(\alpha)
+    \] 
+    Letting $\alpha \to 0$ gives us the desired result.
+    \item[b)] 
+    That they all satisfy $u_\alpha(1) = 0$ is trivial. 
+    To show concavity and monotone increasing, we inspect the derivatives.
+    \[
+        u'_\alpha(x) = x^{\alpha - 1} \geq 0,
+    \]
+    \[
+        u''_\alpha(x) = {\alpha - 1}x^{\alpha - 2} \leq 0.
+    \]
+    As we see, the first derivative is positive and the second derivative is negative, i.e. the function is monotone increasing and concave.
+\end{enumerate}
