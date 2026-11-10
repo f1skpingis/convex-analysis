@@ -121,3 +121,101 @@ In other words, concavity models the effect of satiation.}
     \]
     As we see, the first derivative is positive and the second derivative is negative, i.e. the function is monotone increasing and concave.
 \end{enumerate}
+
+\subsubsection{CO: 3.16}
+\textbf{For each of the following functions determine wheterh it is convex, concave, quasiconvex, or quasiconcave.}
+\begin{enumerate}[label=(\alph*)]
+    \item $f(x) = e^x - 1$. By computing the second derivative of $f$, we get
+    \[
+        f''(x) = e^x > 0
+    \]
+    which means $f$ is convex.
+    It is thus also quasiconvex and infact, since it is single valued and monotone, it is quasiconcave too.
+    \item $f(x_1, x_2) = x_1 x_2$ on $\mathbb{R}_{++}^2$.
+    Let's compute the Hessian
+    \[
+        \nabla^2 f(x_1, x_2) = \begin{pmatrix}
+            0 & 1\\
+            1 & 0
+        \end{pmatrix}.
+    \]
+    The Hessian has eigenvalues $\pm 1$ and is thus neither positive nor negative definite. 
+    This means that it cannot be convex or concave. 
+    As for quasiconvexity or quasiconcavity, let's have a look at the superlevel sets:
+    \[
+        x_1x_2 \geq \alpha
+    \]
+    This can be interpreted as the epigraph (since $x_1, x_2 > 0$) of $g(x) = \alpha / x$ which is a convex function.
+    That in turn means the epigraph and consequently the superlevel sets of $f$ are convex meaning the function is quasiconcave.
+    Since the complement, $\mathbb{R}^n \backslash \{x_1x_2 \geq \alpha\}$, of a convex set (which is not empty, the whole space or a halfspace) is not convex, the function is not quasiconvex.
+    
+    \item Let's look at the Hessian
+    \[
+        \nabla^2 f(x_1, x_2) = \begin{pmatrix}
+            \frac{2}{x_1^3x_2} & \frac{1}{x_1^2x_2^2}\\
+            \frac{1}{x_1^2x_2^2} & \frac{2}{x_1x_2^3}
+        \end{pmatrix}
+    \]
+    All pricipal minors (the (1,1)-entry and determinant) are positive over the entire positive orthant, so this is positive definite.
+    The (1,1)-entry is trivially positive, let's check the determinant,
+    \[
+        \det \nabla^2 f(x_1, x_2) = \frac{4}{x_1^4x_2^4} - \frac{1}{x_1^4x_2^4} = \frac{3}{x_1^4x_2^4} > 0
+    \]
+    Thus the function is convex and quasiconvex (i.e. not concave).
+    To check whether or not it is quasiconcave, we check the superlevel sets,
+    \[
+        \frac{1}{x_1x_2} \geq \alpha.
+    \]
+    This equivalent to
+    \[
+        \frac{1}{\alpha} \geq x_1x_2
+    \]
+    which is a sublevel set of $g(x_1, x_2) = x_1x_2$. 
+    We just saw that $g$ was not a convex function, meaning the sublevel set isn't convex either, thus meaning the superlevel sets of $f$ are not convex.
+    This means $f$ is convex and quasiconvex but niether concave nor quasiconcave. 
+    \item Once again, let's inspect the Hessian
+    \[
+        \nabla^2 f = \begin{pmatrix}
+            0 & -\frac{1}{x_2^2}\\
+            -\frac{1}{x_2^2} & \frac{2x_1}{x^3_2}
+        \end{pmatrix}
+    \]
+    This matrix is neither positive nor negative semidefinite, since the determinant is negative, $-1 / x^4_2$.
+    For a $2\times 2$ matrix that means the eigenvalues must have opposite sign.
+    The function is thus neither convex nor concave. 
+    What about the superlevel sets?
+    \[
+        x_1/x_2 \geq \alpha
+    \]
+    This is equivalent to
+    \[
+        x_1 \geq \alpha x_2.
+    \]
+    This is the epigraph of a linear function and thus a convex set (halfspace).
+    The complement is the sublevel set which is the naturally also a halfspace and thus a convex set.
+    That means the function is both quasiconvex and quasiconcave.
+    \item The Hessian is
+    \[
+        \nabla^2 f(x_1, x_2) = \begin{pmatrix}
+            2/x_2 & -2x_1/x_2^2\\
+            -2x_1/x_2^2 & 2x_1^2/x_2^3
+        \end{pmatrix}
+    \]
+    It looks a bit complicated but the eigenvalues, $\lambda$, are the solutions of
+    \[
+        \lambda(\lambda - 2/x_2 - 2x_1^2/x_2^3) = 0
+    \]
+    This means we have eigenvalues $\lambda = 0$ and $\lambda = 2(x_1^2/x_2^3 + 1/x_2)$.
+    These are both nonnegative so the matrix is positive semidefinite.
+    It can infact also be seen in this more elegant way; the matrix can be factorized as the outer product of $v = (2/x^3_2)[x_2 - x_1]^T$ with itself.
+    That means for any vector $z \in \mathbb{R}^2$, 
+    \[
+        z^T\nabla^2 f(x_1, x_2)z = z^T v v^T z = (z^T v)^2 \geq 0.
+    \]
+    The superlevel sets
+    \[
+        x^2_1/x_2 \geq \alpha
+    \]
+    are epigraphs of a concave function so not convex.
+    The function is only convex and quasiconvex.
+\end{enumerate}
